@@ -1,0 +1,318 @@
+{
+  "valley-dawn": {
+    "source": "2018/12/DSC_5037.jpg",
+    "width": 1366,
+    "height": 911,
+    "widths": [
+      640,
+      1024,
+      1366
+    ]
+  },
+  "pool-pavilions": {
+    "source": "2018/09/Amori-Villa-for-Carly-059.jpg",
+    "width": 1366,
+    "height": 911,
+    "widths": [
+      640,
+      1024,
+      1366
+    ]
+  },
+  "poolside-bedroom": {
+    "source": "2019/01/DSCF5806.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "poolside-bath": {
+    "source": "2018/09/P-Bath-2017.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "poolside-garden": {
+    "source": "2018/09/P-View-To-Valley-1.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "valleyview-bedroom": {
+    "source": "2018/09/VV-Bedroom-2-1.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "valleyview-bed": {
+    "source": "2018/09/WRD_7269-1.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "valleyview-bath": {
+    "source": "2018/12/VV-Bathroom-2.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "garden-villa-terrace": {
+    "source": "2019/01/RLH0893.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "garden-villa-bedroom": {
+    "source": "2018/12/GV-Spacious-Bedroom.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "garden-villa-bath": {
+    "source": "2018/12/GV-Bathroom-1.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "honeymoon-bed": {
+    "source": "2018/09/H-Honeymoon-bed-setup-2.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "honeymoon-view": {
+    "source": "2019/01/RLH0760.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "honeymoon-bath": {
+    "source": "2018/09/H-Bathroom-2.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "treehouse-lounge": {
+    "source": "2019/01/RLH0583.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "treehouse-bedroom": {
+    "source": "2019/01/RLH0600.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "treehouse-bath": {
+    "source": "2019/01/Treehouse-Villa-3-Bathroom.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "restaurant-lounge": {
+    "source": "2018/09/Living-Dining.jpg",
+    "width": 1024,
+    "height": 680,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "yoga-pavilion": {
+    "source": "2019/04/Yoga-inhouse-session.jpg",
+    "width": 1366,
+    "height": 911,
+    "widths": [
+      640,
+      1024,
+      1366
+    ]
+  },
+  "spa-room": {
+    "source": "2018/09/Spa-interior-daylight-021.jpg",
+    "width": 1024,
+    "height": 683,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "floating-breakfast": {
+    "source": "2019/01/DSCF5714.jpg",
+    "width": 1024,
+    "height": 683,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "yoga-valley": {
+    "source": "2018/09/Amori-VIllas-Yoga-2.jpg",
+    "width": 1366,
+    "height": 908,
+    "widths": [
+      640,
+      1024,
+      1366
+    ]
+  },
+  "yoga-group": {
+    "source": "2019/04/Yoga-group.jpg",
+    "width": 1024,
+    "height": 768,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "aerial": {
+    "source": "2025/11/Aerial-2024-small.jpg",
+    "width": 1279,
+    "height": 959,
+    "widths": [
+      640,
+      1024,
+      1279
+    ]
+  },
+  "villa-hillside": {
+    "source": "2018/09/Amori-Villa-close-view.jpg",
+    "width": 1024,
+    "height": 680,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "pool-guests": {
+    "source": "2019/01/What-shall-we-do-today-2016.jpg",
+    "width": 1024,
+    "height": 680,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "retreat-dinner": {
+    "source": "2018/09/closing-dinner.jpg",
+    "width": 1024,
+    "height": 683,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "valleyview-outdoor-bath": {
+    "source": "2018/09/Valleyview-Bathroom-2017.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "garden-villa-daybed": {
+    "source": "2018/12/Amori-Villa-for-Carly-031.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "garden-villa-lounge": {
+    "source": "2019/01/RLH0899.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "honeymoon-champagne": {
+    "source": "2019/01/RLH0847.jpg",
+    "width": 1024,
+    "height": 684,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "honeymoon-stone-bath": {
+    "source": "2019/01/RLH0857-copy.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "treehouse-exterior": {
+    "source": "2018/09/Treehouse-Villa.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "treehouse-garden-bath": {
+    "source": "2018/09/TV-Bathroom.jpg",
+    "width": 1024,
+    "height": 668,
+    "widths": [
+      640,
+      1024
+    ]
+  },
+  "logo": {
+    "source": "2018/09/logo-03.png",
+    "width": 440,
+    "height": 251
+  }
+}

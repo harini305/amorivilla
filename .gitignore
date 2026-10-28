@@ -1,0 +1,18 @@
+# Dependencies and build output
+node_modules/
+.next/
+out/
+
+# Vercel
+.vercel/
+
+# Local only: Phase 1 audit (original assets, screenshots, raw crawl data),
+# design backups and reports. Not part of the website.
+docs/
+design-backups/
+
+# Misc
+*.log
+.env*
+.DS_Store
+Thumbs.db

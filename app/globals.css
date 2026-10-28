@@ -1,0 +1,2126 @@
+/* ==========================================================================
+   Mockup-test design: forest green, cream, gold hairlines, arches.
+   The previous design is saved in design-backups/v1-fullscreen.
+   ========================================================================== */
+:root {
+  /* Forest greens (darkened from the brand greens) */
+  --forest-950: #0e1c15;
+  --forest-900: #12241b;
+  --forest-800: #16291f;
+  --forest-700: #1b3326;
+  --green: #006b3f;
+  --green-deep: #21543f;
+
+  /* Light surfaces */
+  --cream: #f3ede2;
+  --paper: #f8f3ea;
+  --card: #f7f0e4;
+
+  /* Accents */
+  --gold: #c9a86a;
+  --gold-bright: #d9bd82;
+  --gold-soft: rgba(201, 168, 106, 0.45);
+  --terra: #b45f3c;
+  --sage: #a9cf9f;
+
+  /* Text */
+  --ink: #1d2a22;
+  --text: #54595f;
+  --on-dark: #f3ebdc;
+  --on-dark-muted: rgba(243, 235, 220, 0.78);
+  --line-dark: rgba(243, 235, 220, 0.16);
+
+  /* Type: the same two families */
+  --font-heading: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Jost", system-ui, sans-serif;
+
+  /* Layout */
+  --max: 82rem;
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --gap: clamp(1.75rem, 1rem + 3vw, 4.5rem);
+  --header-h: 4.25rem;
+  --screen-pad: clamp(2.25rem, 5vh, 4rem);
+  --screen-h: calc(100svh - var(--header-h));
+  --stage: calc(var(--screen-h) - 2 * var(--screen-pad));
+}
+
+@media (min-width: 64em) {
+  :root {
+    --header-h: 5rem;
+  }
+}
+
+@media (max-height: 50em) {
+  :root {
+    --screen-pad: clamp(1.5rem, 3.5vh, 2.25rem);
+  }
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  /* Only two styles are loaded; never fake bold or italic. */
+  font-synthesis: none;
+}
+
+b,
+strong,
+th,
+dt {
+  font-weight: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+em,
+i,
+address {
+  font-style: normal;
+}
+
+html.menu-open {
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  background: var(--forest-800);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-variant-numeric: lining-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 500;
+  line-height: 1.1;
+  font-variant-numeric: lining-nums;
+  text-wrap: balance;
+}
+
+p,
+ul,
+dl,
+figure,
+address {
+  margin: 0;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.cream :focus-visible,
+.paper :focus-visible {
+  outline-color: var(--green);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--cream);
+  color: var(--ink);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+/* ==========================================================================
+   Layout primitives
+   ========================================================================== */
+.container {
+  width: min(100% - 2 * var(--gutter), var(--max));
+  margin-inline: auto;
+}
+
+/* Each section fills the screen below the header, so a nav jump shows only that
+   section. Content may make a section taller; it is never clipped. */
+.screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: var(--screen-h);
+  padding-block: var(--screen-pad);
+}
+
+section[id] {
+  scroll-margin-top: var(--header-h);
+}
+
+#top {
+  scroll-margin-top: 0;
+}
+
+#contact {
+  scroll-margin-top: calc(var(--header-h) + 1.5rem);
+}
+
+.dark {
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(255, 255, 255, 0.04), transparent 55%),
+    var(--forest-800);
+  color: var(--on-dark-muted);
+}
+
+.dark--alt {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.05), transparent 60%),
+    var(--forest-700);
+}
+
+.cream {
+  background: var(--cream);
+}
+
+.paper {
+  background: var(--paper);
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: #d9cfbd;
+}
+
+.frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   Type helpers
+   ========================================================================== */
+.display {
+  color: var(--on-dark);
+  font-size: clamp(2.5rem, 1.6rem + 3.2vw, 5rem);
+  line-height: 1.02;
+}
+
+.display--dark {
+  color: var(--ink);
+  font-size: clamp(2.25rem, 1.6rem + 2.4vw, 3.75rem);
+}
+
+.caps-title {
+  color: var(--on-dark);
+  font-size: clamp(1.875rem, 1.25rem + 2.2vw, 3.375rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.caps-title--dark {
+  color: var(--ink);
+}
+
+.caps-title--gold {
+  color: var(--gold-bright);
+}
+
+.caps-small {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.125rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  text-align: center;
+}
+
+.section-title p {
+  max-width: 46rem;
+  margin: 0.75rem auto 0;
+  color: var(--on-dark);
+  font-size: clamp(0.9375rem, 0.88rem + 0.3vw, 1.125rem);
+}
+
+.section-title--dark p {
+  color: var(--ink);
+}
+
+.dot-sep {
+  color: var(--gold);
+}
+
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--gold);
+}
+
+.ornament__line {
+  flex: 1;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  min-height: 3.25rem;
+  padding: 0.6rem 2rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+}
+
+.pill:hover {
+  transform: translateY(-1px);
+}
+
+.pill__wa {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: #25d366;
+  color: #fff;
+}
+
+.pill__wa svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.pill--glass {
+  border-color: rgba(243, 235, 220, 0.6);
+  background: rgba(10, 18, 14, 0.55);
+  color: var(--on-dark);
+  backdrop-filter: blur(4px);
+}
+
+.pill--glass:hover {
+  border-color: var(--on-dark);
+  background: rgba(10, 18, 14, 0.75);
+}
+
+.pill--cream {
+  background: var(--cream);
+  color: var(--ink);
+}
+
+.pill--cream:hover {
+  background: #fff;
+}
+
+.pill--forest {
+  background: var(--green-deep);
+  color: var(--on-dark);
+  box-shadow: 0 8px 20px rgba(20, 42, 31, 0.25);
+}
+
+.pill--forest:hover {
+  background: var(--forest-700);
+}
+
+.outline-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.7rem 1.5rem;
+  border: 1px solid var(--ink);
+  color: var(--ink);
+  text-decoration: none;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.outline-button:hover {
+  background: var(--ink);
+  color: var(--cream);
+}
+
+/* ==========================================================================
+   Header
+   ========================================================================== */
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: var(--header-h);
+  border-bottom: 1px solid var(--gold-soft);
+  background: rgba(14, 28, 21, 0.92);
+  color: var(--on-dark);
+  backdrop-filter: blur(8px);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: min(100% - 2 * var(--gutter), var(--max));
+  height: 100%;
+  margin-inline: auto;
+}
+
+.site-header__logo {
+  position: relative;
+  display: block;
+  flex: none;
+  height: 3rem;
+  aspect-ratio: 440 / 251;
+}
+
+.site-header__logo .logo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.site-nav {
+  display: none;
+}
+
+@media (min-width: 64em) {
+  .site-header__logo {
+    height: 3.75rem;
+  }
+
+  .site-nav {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-left: clamp(1rem, 4vw, 5rem);
+  }
+
+  .site-nav ul {
+    display: flex;
+    gap: clamp(1rem, 2.2vw, 2.5rem);
+    margin-inline: auto;
+  }
+
+  .site-nav__link {
+    position: relative;
+    display: block;
+    padding-block: 0.5rem;
+    font-size: 1rem;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  .site-nav__link::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0.15rem;
+    left: 0;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .site-nav__link:hover::after,
+  .site-nav__link[aria-current="true"]::after {
+    transform: scaleX(1);
+  }
+
+  .site-nav__link[aria-current="true"] {
+    color: var(--gold-bright);
+  }
+
+  .site-nav__cta {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.25rem;
+    background: var(--cream);
+    color: var(--ink);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 0.25s ease;
+  }
+
+  .site-nav__cta:hover {
+    background: var(--gold-bright);
+  }
+}
+
+.menu-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0 0.25rem 0 0.75rem;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: 0.9375rem / 1 var(--font-body);
+  cursor: pointer;
+}
+
+.menu-toggle__bars {
+  position: relative;
+  width: 1.5rem;
+  height: 0.5rem;
+  border-block: 1px solid currentColor;
+  transition: transform 0.3s ease;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bars {
+  height: 1px;
+  border-bottom: 0;
+  transform: rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__bars::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: rotate(-90deg);
+}
+
+@media (min-width: 64em) {
+  .menu-toggle {
+    display: none;
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: var(--header-h) 0 0;
+  overflow-y: auto;
+  padding: 1.5rem var(--gutter) 2.5rem;
+  background: var(--forest-900);
+}
+
+.mobile-menu[hidden] {
+  display: none;
+}
+
+.mobile-menu li + li {
+  border-top: 1px solid var(--line-dark);
+}
+
+.mobile-menu__link {
+  display: block;
+  padding-block: 0.95rem;
+  color: var(--on-dark);
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.mobile-menu__link[aria-current="true"] {
+  color: var(--gold-bright);
+}
+
+/* ==========================================================================
+   Hero — centred, cinematic
+   ========================================================================== */
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: max(34rem, 100svh);
+  overflow: hidden;
+  background: var(--forest-900);
+  isolation: isolate;
+}
+
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+
+.hero__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 55%;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 50% 45%, rgba(10, 18, 14, 0.15) 0%, rgba(10, 18, 14, 0.55) 70%, rgba(10, 18, 14, 0.75) 100%),
+    linear-gradient(180deg, rgba(10, 18, 14, 0) 70%, var(--forest-800) 100%);
+}
+
+.hero__content {
+  width: min(100% - 2 * var(--gutter), 60rem);
+  padding-top: calc(var(--header-h) + 2rem);
+  padding-bottom: 3rem;
+  text-align: center;
+}
+
+.hero__title {
+  color: #f1e6d2;
+  font-size: clamp(3.75rem, 1.9rem + 7.6vw, 9rem);
+  line-height: 0.95;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+}
+
+.hero__lead {
+  margin-top: 1.5rem;
+  color: var(--on-dark);
+  font-size: clamp(1.0625rem, 0.95rem + 0.55vw, 1.5rem);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.45);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 1.5rem;
+  margin-top: clamp(2rem, 6vh, 4.5rem);
+}
+
+.hero__actions .pill {
+  min-width: min(100%, 19rem);
+  min-height: clamp(3.25rem, 2.6rem + 1.6vw, 4.25rem);
+  font-size: clamp(1rem, 0.9rem + 0.35vw, 1.3rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__media img {
+    animation: hero-settle 2.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero__title,
+  .hero__lead,
+  .hero__actions {
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .hero__lead {
+    animation-delay: 0.12s;
+  }
+
+  .hero__actions {
+    animation-delay: 0.24s;
+  }
+}
+
+@keyframes hero-settle {
+  from {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+}
+
+/* ==========================================================================
+   That's Amori — stats beside an oval, stone-framed photo
+   ========================================================================== */
+.villa__grid {
+  display: grid;
+  gap: var(--gap);
+  align-items: center;
+}
+
+.villa__sub {
+  margin-top: 0.6rem;
+  color: var(--on-dark);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 2.125rem);
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem 0;
+  margin-top: clamp(1.75rem, 4vh, 3rem);
+}
+
+.stats__item {
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  padding-inline: 0.75rem;
+  text-align: center;
+}
+
+.stats__item:nth-child(even) {
+  border-left: 1px solid var(--gold-soft);
+}
+
+.stats__icon {
+  margin-bottom: 0.35rem;
+  color: var(--gold-bright);
+}
+
+.stats__item strong {
+  color: var(--on-dark);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.6rem);
+  white-space: nowrap;
+}
+
+.stats__item span {
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.villa__ornament {
+  max-width: 26rem;
+  margin-block: clamp(1.5rem, 4vh, 2.75rem) clamp(1.25rem, 3vh, 2rem);
+}
+
+.villa__note {
+  max-width: 34rem;
+  font-size: 0.9375rem;
+}
+
+.villa__note--award {
+  margin-top: 0.5rem;
+  color: var(--gold-bright);
+}
+
+@media (min-width: 48em) {
+  .stats {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .stats__item + .stats__item {
+    border-left: 1px solid var(--gold-soft);
+  }
+}
+
+@media (min-width: 64em) {
+  .villa__grid {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  }
+}
+
+/* The oval: gold rings around a band of CSS "pebbles" around the photo. */
+.oval {
+  justify-self: center;
+  width: min(100%, 22rem);
+}
+
+.oval__stone {
+  aspect-ratio: 4 / 5;
+  padding: clamp(0.9rem, 2vw, 1.6rem);
+  border-radius: 50%;
+  background-color: #b3a68e;
+  background-image:
+    radial-gradient(ellipse 8px 6px at 50% 50%, #efe8da 0 55%, #cdbfa6 68%, transparent 74%),
+    radial-gradient(ellipse 6px 7px at 50% 50%, #d8ccb5 0 55%, #a3957c 70%, transparent 76%),
+    radial-gradient(ellipse 7px 5px at 50% 50%, #e6dccb 0 55%, #bfb199 70%, transparent 76%);
+  background-size: 17px 15px, 14px 16px, 20px 18px;
+  background-position: 0 0, 8px 7px, 4px 11px;
+  box-shadow:
+    0 0 0 2px var(--gold),
+    0 0 0 6px rgba(201, 168, 106, 0.18),
+    0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.oval__photo {
+  width: 100%;
+  height: 100%;
+  border: 2px solid var(--gold);
+  border-radius: 50%;
+}
+
+@media (min-width: 64em) {
+  .oval {
+    width: min(100%, calc(var(--stage) * 0.8));
+  }
+}
+
+/* ==========================================================================
+   Suites — arched cream cards with terracotta details
+   ========================================================================== */
+.suites {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.5vh, 2rem);
+}
+
+.suite-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+}
+
+.suite-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: clamp(1rem, 2vw, 1.5rem) clamp(1rem, 2vw, 1.75rem) 1rem;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--card);
+  color: var(--ink);
+  text-align: center;
+  container-type: inline-size;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.suite-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Corner details, varied across the three columns as in the mockup. */
+.suite-card::before,
+.suite-card::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+
+.suite-card--1::before {
+  top: 1rem;
+  left: 1rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--terra);
+}
+
+.suite-card--1::after {
+  right: 1rem;
+  bottom: 1rem;
+  width: 2.5rem;
+  height: 2.25rem;
+  border-right: 2px solid var(--terra);
+  border-bottom: 2px solid var(--terra);
+  border-bottom-right-radius: 4px;
+}
+
+.suite-card--2::before,
+.suite-card--3::before {
+  top: 1rem;
+  left: 1rem;
+  width: 2.5rem;
+  height: 2.25rem;
+  border-top: 2px solid var(--terra);
+  border-left: 2px solid var(--terra);
+  border-top-left-radius: 4px;
+}
+
+.suite-card--2::after {
+  top: 0;
+  right: 0;
+  width: 48%;
+  height: 70%;
+  border-top: 10px solid var(--terra);
+  border-right: 10px solid var(--terra);
+  border-top-right-radius: 18px;
+  mask-image: linear-gradient(to left, #000 50%, transparent), linear-gradient(to bottom, #000 50%, transparent);
+  mask-composite: intersect;
+}
+
+.suite-card--3::after {
+  bottom: 0;
+  left: 0;
+  width: 48%;
+  height: 70%;
+  border-bottom: 10px solid var(--terra);
+  border-left: 10px solid var(--terra);
+  border-bottom-left-radius: 18px;
+  mask-image: linear-gradient(to right, #000 50%, transparent), linear-gradient(to top, #000 50%, transparent);
+  mask-composite: intersect;
+}
+
+.suite-card__arch {
+  width: 76%;
+  aspect-ratio: 1.45;
+  border-radius: 38cqw 38cqw 10px 10px;
+}
+
+.suite-card__name {
+  margin-top: 0.85rem;
+  color: var(--ink);
+  font-size: clamp(1.5rem, 1.15rem + 1.1vw, 2.125rem);
+}
+
+.suite-card__name::before {
+  content: "";
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.55rem;
+  border-radius: 50%;
+  background: var(--terra);
+  vertical-align: 0.25em;
+}
+
+.suite-card__features {
+  margin-top: 0.35rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.suite-card__features .dot-sep {
+  color: var(--terra);
+}
+
+/* The whole card opens the details; the visible label keeps it discoverable. */
+.suite-card__open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--terra);
+  font: 0.8125rem / 1.4 var(--font-body);
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.suite-card__open::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.suites__footnote {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--on-dark);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.suites__rule {
+  flex: 0 1 4.5rem;
+  height: 1px;
+  background: var(--terra);
+}
+
+@media (min-width: 40em) {
+  .suite-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64em) {
+  .suites {
+    flex: 1;
+    min-height: var(--stage);
+  }
+
+  .suite-grid {
+    flex: 1;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: clamp(1rem, 2vh, 1.75rem) clamp(1rem, 2.2vw, 2.25rem);
+  }
+
+  .suite-card {
+    padding-block: clamp(0.85rem, 1.8vh, 1.4rem) 0.75rem;
+  }
+
+  .suite-card__arch {
+    flex: 1;
+    width: 62%;
+    min-height: 7rem;
+    aspect-ratio: auto;
+    border-radius: 31cqw 31cqw 10px 10px;
+  }
+
+  .suite-card__name {
+    margin-top: 0.6rem;
+  }
+}
+
+/* Room details dialog */
+.suite-dialog {
+  width: min(100% - 2rem, 62rem);
+  max-height: calc(100svh - 2rem);
+  padding: 0;
+  overflow: auto;
+  border: 0;
+  border-radius: 18px;
+  background: var(--paper);
+  color: var(--text);
+}
+
+.suite-dialog::backdrop {
+  background: rgba(8, 16, 12, 0.72);
+}
+
+.suite-dialog__panel {
+  position: relative;
+  display: grid;
+  gap: 1.75rem;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+}
+
+.suite-dialog__close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid var(--gold-soft);
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.suite-dialog__main {
+  aspect-ratio: 3 / 2;
+  border-radius: 12px;
+}
+
+.suite-dialog__thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.suite-dialog__thumb {
+  width: 4.5rem;
+  aspect-ratio: 3 / 2;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.65;
+}
+
+.suite-dialog__thumb[aria-pressed="true"] {
+  outline: 2px solid var(--terra);
+  outline-offset: 2px;
+  opacity: 1;
+}
+
+.suite-dialog__type {
+  color: var(--terra);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.suite-dialog__name {
+  margin-block: 0.25rem 1rem;
+  color: var(--ink);
+  font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+}
+
+.suite-dialog__body > p:not(.suite-dialog__type) {
+  font-size: 0.9375rem;
+}
+
+.suite-dialog__details {
+  margin-block: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e3d9c6;
+}
+
+.suite-dialog__details > div {
+  padding-block: 0.6rem;
+  border-top: 1px solid #e3d9c6;
+}
+
+.suite-dialog__details dt {
+  color: var(--ink);
+}
+
+.suite-dialog__details dd {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+@media (min-width: 52em) {
+  .suite-dialog__panel {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: start;
+  }
+}
+
+/* ==========================================================================
+   The Amori Experience — arched outline cards in a row
+   ========================================================================== */
+.experiences {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3.5vh, 2.75rem);
+}
+
+.exp-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.exp-card {
+  display: flex;
+  container-type: inline-size;
+}
+
+.exp-row .exp-card:last-child {
+  grid-column: 1 / -1;
+  justify-self: center;
+  width: calc(50% - 0.5rem);
+}
+
+.exp-card__inner {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.6rem 0.6rem 1.1rem;
+  border: 1px solid var(--gold-soft);
+  border-radius: 50cqw 50cqw 18px 18px;
+  background: var(--paper);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.exp-card__inner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(29, 42, 34, 0.12);
+}
+
+.exp-card__arch {
+  width: 100%;
+  aspect-ratio: 1.05;
+  border-radius: calc(50cqw - 0.6rem) calc(50cqw - 0.6rem) 12px 12px;
+}
+
+.exp-card h3 {
+  margin-top: 0.85rem;
+  padding-inline: 0.4rem;
+  color: var(--ink);
+  font-size: clamp(1.2rem, 1rem + 0.6vw, 1.5rem);
+}
+
+.exp-card p {
+  margin-top: 0.3rem;
+  padding-inline: 0.6rem;
+  color: var(--text);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
+.exp-afield {
+  max-width: 62rem;
+  margin-inline: auto;
+  color: var(--text);
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.exp-afield strong {
+  color: var(--ink);
+}
+
+@media (min-width: 40em) {
+  .exp-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .exp-row .exp-card:last-child {
+    grid-column: auto;
+    width: auto;
+    justify-self: stretch;
+  }
+}
+
+@media (min-width: 64em) {
+  .experiences {
+    flex: 1;
+    min-height: var(--stage);
+  }
+
+  .exp-row {
+    flex: 1;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(0.75rem, 1.4vw, 1.5rem);
+  }
+
+  .exp-card__arch {
+    flex: 1;
+    min-height: 10rem;
+    aspect-ratio: auto;
+  }
+}
+
+/* ==========================================================================
+   Wellness — gold title, package columns, shared inclusions panel
+   ========================================================================== */
+.wellness__head {
+  text-align: center;
+}
+
+.wellness__head .caps-title {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+}
+
+.wellness__leaf {
+  flex: none;
+  width: clamp(1.25rem, 2vw, 1.9rem);
+  height: auto;
+  color: var(--gold);
+}
+
+.wellness__leaf--flip {
+  transform: scaleX(-1);
+}
+
+.wellness__kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  color: var(--on-dark);
+  font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.375rem);
+}
+
+.wellness__dash {
+  width: clamp(2rem, 8vw, 6rem);
+  height: 1px;
+  background: var(--gold-soft);
+}
+
+.wellness {
+  padding-block: clamp(1.5rem, 3.5vh, 2.75rem);
+}
+
+.wellness__intro {
+  max-width: 50rem;
+  margin: 0.5rem auto 0;
+  color: var(--sage);
+  font-size: 0.9375rem;
+}
+
+.pkg {
+  margin-top: clamp(1rem, 2.5vh, 1.75rem);
+  color: var(--on-dark);
+}
+
+.pkg__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) repeat(3, minmax(0, 1.25fr));
+  border-bottom: 1px solid var(--line-dark);
+}
+
+.pkg__row--actions {
+  border-bottom: 0;
+}
+
+.pkg__label,
+.pkg__cell {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.pkg__label {
+  align-self: center;
+}
+
+.pkg__cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.pkg__mobile-label {
+  display: none;
+}
+
+.pkg__head {
+  gap: 0.1rem;
+  padding-block: 0.5rem 0.7rem;
+}
+
+.pkg__leaf {
+  width: 1.5rem;
+  color: var(--gold);
+}
+
+.pkg__nights {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 1.1rem + 1.2vw, 2.25rem);
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.pkg__days {
+  color: var(--gold-bright);
+  font-size: 0.8125rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pkg__price {
+  color: var(--gold-bright);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.375rem;
+}
+
+/* The middle column is framed in gold, as in the mockup (no "most popular" claim). */
+.pkg__cell--feature {
+  border-inline: 1px solid var(--gold);
+  background: rgba(201, 168, 106, 0.06);
+}
+
+.pkg__row--head .pkg__cell--feature {
+  border-top: 1px solid var(--gold);
+  border-radius: 14px 14px 0 0;
+}
+
+.pkg__row--actions .pkg__cell--feature {
+  border-bottom: 1px solid var(--gold);
+  border-radius: 0 0 14px 14px;
+}
+
+.pkg__button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 17rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  background: var(--forest-700);
+  color: var(--on-dark);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 0.25s ease;
+}
+
+.pkg__button:hover {
+  background: var(--forest-900);
+}
+
+.pkg__button--gold {
+  border-color: var(--gold-bright);
+  background: linear-gradient(180deg, #e6cd92, #b98f4c);
+  color: var(--forest-950);
+}
+
+.pkg__button--gold:hover {
+  background: linear-gradient(180deg, #edd8a6, #c79c58);
+}
+
+/* Narrow screens: each row's label on its own line, the three values beneath. */
+@media (max-width: 47.99em) {
+  .pkg__row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .pkg__label {
+    grid-column: 1 / -1;
+    padding: 0.75rem 0.25rem 0.1rem;
+    color: var(--gold-bright);
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .pkg__row--head .pkg__label,
+  .pkg__row--actions .pkg__label {
+    display: none;
+  }
+
+  .pkg__cell {
+    padding: 0.35rem 0.4rem 0.7rem;
+    font-size: 0.8125rem;
+  }
+
+  .pkg__button {
+    padding: 0.4rem 0.5rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.06em;
+  }
+}
+
+.pkg-all {
+  display: grid;
+  margin-top: clamp(1rem, 2.5vh, 1.75rem);
+  overflow: hidden;
+  border: 1px solid var(--gold-soft);
+  border-radius: 18px;
+}
+
+.pkg-all__photo {
+  aspect-ratio: 16 / 9;
+}
+
+.pkg-all__text {
+  padding: clamp(1rem, 2vw, 1.5rem) clamp(1.25rem, 2.5vw, 2rem);
+}
+
+.pkg-all__text .caps-small {
+  color: var(--gold-bright);
+}
+
+.leaf-list {
+  display: grid;
+  gap: 0.3rem 1.5rem;
+  margin-top: 0.6rem;
+  color: var(--on-dark);
+  font-size: 0.875rem;
+}
+
+.leaf-list li {
+  position: relative;
+  padding-left: 1.4rem;
+}
+
+.leaf-list li::before {
+  content: "";
+  position: absolute;
+  top: 0.5em;
+  left: 0;
+  width: 0.7rem;
+  height: 0.45rem;
+  border-radius: 0 100% 0 100%;
+  background: var(--gold);
+  transform: rotate(-30deg);
+}
+
+.pkg-all__note {
+  margin-top: 0.9rem;
+  color: var(--sage);
+  font-size: 0.875rem;
+}
+
+@media (min-width: 40em) {
+  .leaf-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64em) {
+  .pkg-all {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+
+  .pkg-all__photo {
+    aspect-ratio: auto;
+    min-height: 8rem;
+  }
+
+  .leaf-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ==========================================================================
+   Retreats — organic photo shape beside the offer
+   ========================================================================== */
+.retreats {
+  display: grid;
+  gap: var(--gap);
+  align-items: center;
+}
+
+.blob {
+  position: relative;
+  justify-self: center;
+  width: min(100% - 1.75rem, 30rem);
+  aspect-ratio: 1.08;
+}
+
+.blob::before {
+  content: "";
+  position: absolute;
+  inset: -0.85rem;
+  border: 1.5px solid var(--gold);
+  border-radius: 44% 56% 40% 60% / 52% 42% 58% 48%;
+}
+
+.blob__photo {
+  position: absolute;
+  inset: 0;
+  border-radius: 46% 54% 42% 58% / 54% 44% 56% 46%;
+}
+
+.blob__inset {
+  position: absolute;
+  right: 0;
+  bottom: -4%;
+  width: 34%;
+  aspect-ratio: 1;
+  border: 6px solid var(--cream);
+  border-radius: 50%;
+  box-shadow: 0 10px 26px rgba(29, 42, 34, 0.25);
+}
+
+.retreats__text {
+  color: var(--text);
+}
+
+.retreats__lead {
+  margin-block: 1.25rem 1rem;
+  color: var(--ink);
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.1875rem);
+  line-height: 1.55;
+}
+
+.retreats__text p:not(.retreats__lead) {
+  font-size: 0.9375rem;
+}
+
+.retreats__text .outline-button {
+  margin-top: 1.75rem;
+}
+
+@media (max-width: 63.99em) {
+  .blob {
+    order: 1;
+  }
+}
+
+@media (min-width: 64em) {
+  .retreats {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .blob {
+    width: min(100% - 1.75rem, calc(var(--stage) * 0.95));
+  }
+}
+
+/* ==========================================================================
+   Finding Amori + Plan your stay — two columns on paper
+   ========================================================================== */
+.paper__ornament {
+  max-width: 34rem;
+  margin: 0 auto clamp(1.25rem, 3vh, 2rem);
+}
+
+.split {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.split__col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.terra-rule {
+  position: relative;
+  display: block;
+  width: 11rem;
+  height: 2px;
+  margin-top: 0.75rem;
+  background: var(--terra);
+}
+
+.terra-rule::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--paper);
+  border: 2px solid var(--terra);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.terra-sub {
+  margin-top: 0.9rem;
+  color: var(--terra);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(1rem, 0.95rem + 0.3vw, 1.2rem);
+  letter-spacing: 0.1em;
+}
+
+.framed {
+  width: 100%;
+  margin-top: 1.25rem;
+  padding: 0.5rem;
+  border: 1.5px solid #4a5a4f;
+  border-radius: 22px;
+}
+
+.framed__inner {
+  aspect-ratio: 16 / 9;
+  border-radius: 15px;
+}
+
+.split__caption {
+  margin-top: 1rem;
+  color: var(--ink);
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1.25rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.split__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.4rem;
+  color: var(--ink);
+  font-size: 0.9375rem;
+  text-align: left;
+}
+
+.split__meta--small {
+  font-size: 0.8125rem;
+}
+
+.split__meta a {
+  color: var(--green);
+}
+
+.split__pin {
+  flex: none;
+  width: 1.6rem;
+  height: 1.6rem;
+  color: var(--terra);
+}
+
+.split__nav {
+  flex: none;
+  color: var(--green-deep);
+}
+
+.split__col--right .terra-sub {
+  margin-top: 1.1rem;
+}
+
+.check-list {
+  display: grid;
+  gap: 0.45rem;
+  width: 100%;
+  max-width: 36rem;
+  margin-top: 0.75rem;
+  color: var(--ink);
+  font-size: 0.875rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+.check-list li {
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  gap: 0.65rem;
+}
+
+.check-list svg {
+  margin-top: 0.05rem;
+  color: var(--green-deep);
+}
+
+.split__col--right .pill {
+  margin-top: 1.5rem;
+}
+
+.split__note {
+  margin-top: 0.75rem;
+  color: var(--text);
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 63.99em) {
+  .split__col--right {
+    padding-top: 2.5rem;
+    border-top: 1px solid #d8cdb9;
+  }
+}
+
+@media (min-width: 64em) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .split__col {
+    padding-inline: clamp(1.5rem, 3vw, 3.5rem);
+  }
+
+  .split__col--right {
+    border-left: 1px solid #cfc3ad;
+  }
+
+  .framed__inner {
+    aspect-ratio: auto;
+    height: clamp(11rem, calc(var(--stage) * 0.38), 24rem);
+  }
+}
+
+/* ==========================================================================
+   Footer — one compact bar
+   ========================================================================== */
+.site-footer {
+  border-top: 1px solid var(--gold-soft);
+  background: var(--forest-900);
+  color: var(--on-dark-muted);
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.site-footer__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem 1.75rem;
+  padding-block: 1rem;
+  text-align: center;
+}
+
+.site-footer__logo {
+  width: auto;
+  height: 2.5rem;
+}
+
+.site-footer__address {
+  font-style: normal;
+}
+
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 1.25rem;
+}
+
+.site-footer a {
+  color: var(--on-dark);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.site-footer__social {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.site-footer__social svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (max-width: 47.99em) {
+  .site-footer__bar {
+    flex-direction: column;
+  }
+}
+
+/* Desktop: logo | address | links | copyright, with gold dividers. */
+@media (min-width: 64em) {
+  .site-footer__bar {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0;
+    padding-block: 0.75rem;
+    text-align: left;
+  }
+
+  .site-footer__bar > * + * {
+    padding-left: clamp(1rem, 2.2vw, 2.5rem);
+    margin-left: clamp(1rem, 2.2vw, 2.5rem);
+    border-left: 1px solid var(--gold-soft);
+  }
+
+  .site-footer__logo {
+    height: 2.75rem;
+  }
+
+  .site-footer__address {
+    flex: 1;
+  }
+
+  .site-footer__copy {
+    white-space: nowrap;
+  }
+}
+
+/* ==========================================================================
+   404
+   ========================================================================== */
+.not-found {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 1.25rem;
+  min-height: 100svh;
+  padding: 2rem var(--gutter);
+  background: var(--cream);
+  color: var(--ink);
+  text-align: center;
+}
+
+.not-found__logo {
+  width: 10rem;
+  margin-bottom: 1rem;
+}
+
+.not-found .button {
+  padding: 0.75rem 1.5rem;
+  background: var(--green-deep);
+  color: var(--on-dark);
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Desktop fit: Wellness fills exactly one screen, and Finding Amori plus the
+   footer fill one screen together. Sizes scale with the viewport height so the
+   same design fits short browser windows; nothing is clipped if it can't.
+   ========================================================================== */
+@media (min-width: 64em) {
+  :root {
+    --footer-h: 4.5rem;
+  }
+
+  /* Suites: a little tighter on short screens. */
+  .suite-card__arch {
+    min-height: clamp(5rem, 12vh, 7rem);
+  }
+
+  /* Wellness */
+  .wellness {
+    padding-block: clamp(0.75rem, 3vh, 2.75rem);
+  }
+
+  .wellness .caps-title {
+    font-size: clamp(1.375rem, min(1.25rem + 2.2vw, 4.8vh), 3.375rem);
+  }
+
+  .wellness__leaf {
+    width: clamp(1rem, 2.6vh, 1.9rem);
+  }
+
+  .wellness__kicker {
+    margin-top: clamp(0.15rem, 0.6vh, 0.5rem);
+    font-size: clamp(0.95rem, 2.2vh, 1.375rem);
+  }
+
+  .wellness__intro {
+    margin-top: clamp(0.2rem, 0.7vh, 0.5rem);
+    font-size: clamp(0.8125rem, 1.7vh, 0.9375rem);
+  }
+
+  .pkg {
+    margin-top: clamp(0.5rem, 2vh, 1.75rem);
+  }
+
+  .pkg__label,
+  .pkg__cell {
+    padding-block: clamp(0.2rem, 0.75vh, 0.6rem);
+    font-size: clamp(0.8rem, 1.6vh, 0.9375rem);
+  }
+
+  .pkg__head {
+    padding-block: clamp(0.25rem, 0.8vh, 0.5rem) clamp(0.35rem, 1vh, 0.9rem);
+  }
+
+  .pkg__leaf {
+    width: clamp(1rem, 2.4vh, 1.5rem);
+  }
+
+  .pkg__nights {
+    font-size: clamp(1.125rem, min(1.1rem + 1.2vw, 3.8vh), 2.25rem);
+  }
+
+  .pkg__days {
+    font-size: clamp(0.7rem, 1.4vh, 0.8125rem);
+  }
+
+  .pkg__price {
+    font-size: clamp(1.1rem, 2.6vh, 1.5rem);
+  }
+
+  .pkg__button {
+    min-height: clamp(1.9rem, 4.4vh, 2.75rem);
+  }
+
+  .pkg-all {
+    margin-top: clamp(0.5rem, 2vh, 1.75rem);
+  }
+
+  .pkg-all__photo {
+    min-height: 0;
+  }
+
+  .pkg-all__text {
+    padding: clamp(0.6rem, 1.6vh, 1.5rem) clamp(1rem, 2vw, 2rem);
+  }
+
+  .pkg-all__text .caps-small {
+    font-size: clamp(0.9rem, 1.9vh, 1.125rem);
+  }
+
+  .leaf-list {
+    gap: clamp(0.1rem, 0.4vh, 0.35rem) 1.5rem;
+    margin-top: clamp(0.3rem, 0.9vh, 0.85rem);
+    font-size: clamp(0.78rem, 1.6vh, 0.9375rem);
+  }
+
+  /* Finding Amori + Plan your stay: the screen minus the footer. */
+  #location {
+    min-height: calc(var(--screen-h) - var(--footer-actual, var(--footer-h)));
+    padding-block: clamp(0.75rem, 3vh, 3rem);
+  }
+
+  #location > .container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+
+  .split {
+    flex: 1;
+  }
+
+  .split__col--right {
+    align-self: center;
+  }
+
+  .paper__ornament {
+    margin-bottom: clamp(0.4rem, 1.5vh, 2rem);
+  }
+
+  .paper .caps-title {
+    font-size: clamp(1.5rem, min(1.25rem + 2.2vw, 4.6vh), 3.375rem);
+  }
+
+  .terra-rule {
+    margin-top: clamp(0.35rem, 1vh, 0.75rem);
+  }
+
+  .terra-sub,
+  .split__col--right .terra-sub {
+    margin-top: clamp(0.35rem, 1.2vh, 1.1rem);
+    font-size: clamp(0.9rem, 1.9vh, 1.2rem);
+  }
+
+  /* The photo takes whatever height the text column leaves. */
+  .framed {
+    display: flex;
+    flex: 1;
+    margin-top: clamp(0.5rem, 1.6vh, 1.25rem);
+  }
+
+  .framed__inner {
+    flex: 1;
+    height: auto;
+    min-height: clamp(6rem, 16vh, 10rem);
+  }
+
+  .split__caption {
+    margin-top: clamp(0.4rem, 1.2vh, 1rem);
+    font-size: clamp(1rem, 2.2vh, 1.25rem);
+  }
+
+  .split__meta {
+    margin-top: clamp(0.15rem, 0.5vh, 0.4rem);
+  }
+
+  .check-list {
+    gap: clamp(0.1rem, 0.45vh, 0.45rem);
+    margin-top: clamp(0.3rem, 0.9vh, 0.75rem);
+    font-size: clamp(0.78rem, 1.55vh, 0.9375rem);
+  }
+
+  .split__col--right .pill {
+    min-height: clamp(2.5rem, 5.2vh, 3.25rem);
+    margin-top: clamp(0.6rem, 1.8vh, 1.5rem);
+  }
+
+  .split__note {
+    margin-top: clamp(0.3rem, 0.9vh, 0.75rem);
+  }
+
+}
+
+/* Short browser windows (laptops with toolbars): slightly denser text so
+   Wellness and Finding Amori + footer still fit one screen. */
+@media (min-width: 64em) and (max-height: 46em), (min-width: 64em) and (max-width: 79.99em) {
+  .check-list,
+  .leaf-list,
+  .pkg__label,
+  .pkg__cell {
+    line-height: 1.32;
+  }
+
+  .check-list {
+    font-size: clamp(0.75rem, 1.55vh, 0.9375rem);
+  }
+
+  .pkg__label,
+  .pkg__cell,
+  .leaf-list {
+    font-size: clamp(0.75rem, 1.6vh, 0.9375rem);
+  }
+
+  .split__note {
+    font-size: 0.75rem;
+  }
+
+  .paper__ornament {
+    margin-bottom: 0.25rem;
+  }
+
+  .paper .caps-title {
+    font-size: clamp(1.3rem, min(1.25rem + 2.2vw, 4.6vh), 3.375rem);
+  }
+}
+
+/* Narrower desktops: give the two location columns more width so lines wrap less. */
+@media (min-width: 64em) and (max-width: 79.99em) {
+  .split__col {
+    padding-inline: 1.25rem;
+  }
+}
+
+@media (min-width: 64em) and (max-height: 46em), (min-width: 64em) and (max-width: 79.99em) {
+  .split__col--right .pill {
+    min-height: 2.4rem;
+    margin-top: 0.6rem;
+  }
+
+}
+
+@media (min-width: 64em) and (max-height: 42em) {
+  #location {
+    padding-block: 0.5rem;
+  }
+
+  .terra-rule {
+    margin-top: 0.3rem;
+  }
+
+  .terra-sub,
+  .split__col--right .terra-sub {
+    margin-top: 0.3rem;
+    font-size: 0.875rem;
+  }
+
+  .check-list {
+    gap: 0.1rem;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    line-height: 1.28;
+  }
+
+  .paper .caps-title {
+    font-size: 1.25rem;
+  }
+
+  .split__note {
+    margin-top: 0.2rem;
+  }
+}
